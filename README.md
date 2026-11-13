@@ -135,7 +135,7 @@ Real-data reproduction requires obtaining the relevant recordings under their pr
 | [`tests/neural_decoder/`](tests/neural_decoder/) | Numerical, data-boundary, streaming-state, export, and audit-mutation tests. |
 | [`neural_experiments/results/`](neural_experiments/results/README.md) | Shareable aggregate evidence and provenance; raw experimental outputs stay in ignored local directories. |
 
-An earlier image-classification and native-kernel experiment is retained in [CNN_EXPERIMENT.md](CNN_EXPERIMENT.md). It is separate from the neural-decoding results described here.
+An earlier image-classification and native-kernel experiment now has its own repository, [cnn-python-vs-assembly](https://github.com/logannye/cnn-python-vs-assembly). It is separate from the neural-decoding results described here.
 
 ## License
 

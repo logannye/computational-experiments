@@ -426,5 +426,5 @@ and aggregate metrics; the private model/sample files referenced by their hashes
 are intentionally absent. [SCORING.md](SCORING.md) explains aggregation and the
 [notebook](NOTEBOOK.md) records decisions. The data and runtime documents retain
 their dated pre-execution text as provenance; their current-state banners link to
-the completed evidence. The original image experiment remains documented in
-[the repository's CNN record](../CNN_EXPERIMENT.md).
+the completed evidence. The original image experiment is documented in
+[its own repository](https://github.com/logannye/cnn-python-vs-assembly).

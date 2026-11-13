@@ -10,8 +10,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "torch>=2.6,<3",
-    "torchvision>=0.21,<1",
-    "Pillow>=10,<13",
 ]
 
 [project.optional-dependencies]
@@ -37,10 +35,6 @@ runtime = [
 ]
 
 [project.scripts]
-cnn-train = "classifier.train:main"
-cnn-evaluate = "classifier.evaluate:main"
-cnn-predict = "classifier.predict:main"
-cnn-benchmark = "classifier.benchmark:main"
 neural-decode = "neural_decoder.cli:main"
 
 [tool.setuptools.packages.find]
