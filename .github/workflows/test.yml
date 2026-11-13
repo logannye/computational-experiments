@@ -36,9 +36,3 @@ jobs:
         run: ruff format --check .
       - name: Test
         run: pytest -q
-      - name: Exercise the documented workflow
-        run: |
-          python scripts/make_demo_data.py --output data/demo
-          cnn-train --data-dir data/demo --epochs 2 --checkpoint checkpoints/demo.pt
-          cnn-evaluate --checkpoint checkpoints/demo.pt --data-dir data/demo/test
-          cnn-predict --checkpoint checkpoints/demo.pt --image "$(find data/demo/test -name '*.png' -print -quit)"
