@@ -155,12 +155,6 @@ These entries connect the frozen comparison to the observed evidence; they are n
 | Validate stream metadata outside the bare-engine claim | Numeric state alone cannot identify channel order or a missing input | Exact stream/sequence/cadence/identity checks plus poisoned-state, reset and checkpoint tests | Qualified C/E lifecycle and measured adapter overhead; no exactly-once or atomic-write claim |
 | Preserve wall-clock outliers | Good p99 can coexist with long isolated pauses | Retain every raw timestamp and recompute summary/miss counts independently | Four fast deadline exceedances across A/C/D retained; overall provisional service goal failed through two paced blocks. No timing reruns replaced them |
 
-## Application wording
-
-> Built a 23,367-parameter causal neural decoder that improved mean later-day R² from 0.034 to 0.178 across seven recording days from one participant, beating selected ridge in all 21 seed/day comparisons. Converted all three final models to a 61.5% smaller ONNX int8 graph with worst seed/day variance-weighted R² loss of 0.00172, using a float32 layout control to identify the main source of fast-replay improvement. Profiled the predetermined seed-0 int8 model at 50 Hz in offline replay, pairing later-day R² 0.1776 with 0.731 ms service p99 and 9.449 ms delivery p99 over 90,000 updates, retaining five missed deadlines and verifying deterministic checkpoint continuation.
-
-This three-sentence claim uses the int8 soak's actual percentiles and miss count. Supporting evidence retains the failed overall short-campaign service goal, all outliers, output-specific losses and the one-participant, nonofficial-FALCON boundary. Quality and timing come from different identified recordings using the same exact weights; this is neither fresh generalization nor live control.
-
 ## Evidence and provenance
 
 The quality, short-runtime, soak and lifecycle execution source was committed at `94d545758a10b18128b8c318e950111c0997f7b9`. The quality auditor passed the complete three-model conversion evidence; the runtime auditor passed all 50 short blocks and both soaks, including every measured prediction. Audit success authenticates execution and scoring evidence while preserving the failed runtime goal.
