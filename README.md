@@ -136,3 +136,7 @@ Real-data reproduction requires obtaining the relevant recordings under their pr
 | [`neural_experiments/results/`](neural_experiments/results/README.md) | Shareable aggregate evidence and provenance; raw experimental outputs stay in ignored local directories. |
 
 An earlier image-classification and native-kernel experiment is retained in [CNN_EXPERIMENT.md](CNN_EXPERIMENT.md). It is separate from the neural-decoding results described here.
+
+## License
+
+The code is released under the [MIT License](LICENSE). The neural recordings are not part of this repository and are not redistributed; they remain under their providers' terms, described for [FALCON H1](neural_experiments/data/README.md) and the [multiday cursor recordings](neural_experiments/v3/DATA.md). The upstream FALCON license notice is kept in [FALCON_LICENSE.txt](neural_experiments/data/FALCON_LICENSE.txt).
