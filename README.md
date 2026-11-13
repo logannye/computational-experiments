@@ -5,6 +5,10 @@
 
 **Predicting movement from recorded neural activity, with experiments on accuracy across recording sessions, calibration effort, and streaming performance.**
 
+![A compact causal network compared with a ridge baseline on seven held-out recording days](neural_experiments/figures/held-out-quality.png)
+
+*A 23,367-parameter causal network (blue) against a ridge-regression baseline (orange) on seven recording days that stayed sealed until the model was frozen. Details are in the [H1 final report](neural_experiments/FINAL_REPORT.md).*
+
 This repository contains the models, data pipelines, evaluation code, and deployment experiments for an offline brain-computer interface research project. It uses public human intracortical recordings: measurements of neural activity collected through implanted electrode arrays. The software learns a mapping from those measurements to movement-related targets, then evaluates predictions on data kept out of fitting.
 
 The goal is to understand what it takes for a decoder to remain useful beyond its training session and to execute reliably one observation at a time. The work combines machine learning experiments with streaming implementations, compression checks, timing measurements, and independently implemented numerical audits. All reported results come from recorded data and software replay; the project has not been tested in live human control.
@@ -58,6 +62,10 @@ Accuracy is reported using **R²**, a regression score rather than a classificat
 | [Daily calibration, V3](neural_experiments/v3/REPORT.md) | With the same **120 seconds of calibration labels**, the selected decoding procedure reached mean R² **0.258**, versus **0.021** for the original ridge recipe. | 26 new sessions from nine previously studied participants, evaluated after a separate calibration prefix. This depends on fitting a decoder for each session. |
 | [Reduced fresh calibration, V4](neural_experiments/v4/REPORT.md) | Historical supervised models plus **30 seconds of fresh labels** reached mean R² **0.245**, versus **0.069** for matched training from scratch. | 23 scored new sessions from eight known participants. The stronger claim that 30 seconds preserves 120-second daily accuracy did not pass its test. |
 
+![Decoding accuracy per participant with zero, 30 and 120 seconds of fresh calibration labels](neural_experiments/figures/v4-reduced-calibration.png)
+
+*Reduced fresh calibration (V4), per participant: reusing a person's earlier labeled sessions with no fresh labels (gray) or 30 seconds of them (teal), against fitting from 120 seconds of fresh labels (orange). T2 is the participant for whom history reuse fails.*
+
 Later adaptation experiments found important limits. In the [latest calibration study, V9](neural_experiments/v9/REPORT.md), collecting direction-balanced trials did not recover useful decoding for participant T2. Increasing continuous calibration from two to six minutes improved that participant's mean R² from −0.171 to −0.108, but it remained negative. The [V5–V9 reports](neural_experiments/REVIEWER_GUIDE.md) preserve the unsuccessful acceptance, adaptation, and recovery experiments.
 
 These are comparisons within separate studies. Different cohorts and evaluation windows prevent treating successive version numbers as a single accuracy leaderboard, or combining one model's accuracy with another model's latency.
@@ -76,6 +84,10 @@ The NumPy and int8 implementations each completed a 30-minute replay at 50 updat
 **Service time** measures the decoder step. **Delivery time** starts at the scheduled release and includes time waiting to run. The 99th percentile, or **p99**, describes the tail of the measured distribution; it is not a maximum or a guaranteed bound. Both soaks had late results, and the separate short campaign failed the project's 2 ms service-p99 target in two blocks.
 
 Timing uses development recordings; later-day accuracy uses separate recordings with the same model weights. Seed 0 was chosen before measurement, and its scores above differ from the three-seed mean. The measured boundary starts when precomputed neural features are available, excluding acquisition, spike detection, transport, and human feedback. Smaller exported graphs did not establish lower process memory or consistently faster scheduled delivery.
+
+![Step-time p99 for three implementations of the same model, in fast replay and paced at 20 ms](neural_experiments/figures/runtime.png)
+
+*From the original H1 runtime study, which used a development-stage model rather than the final one: the same weights in three implementations. Run back to back (left), 99th-percentile step time separates the implementations; released on a 20 ms schedule (right), it is 3 to 16 times higher in every block. Details are in the [H1 final report](neural_experiments/FINAL_REPORT.md).*
 
 The [deployment report](neural_experiments/H1_FINAL_CLOSURE_REPORT.md) contains every repeat, outlier, resource measurement, and audit receipt, along with file-reset, invalid-input, and checkpoint-continuation checks. A successful checkpoint test establishes numerical resume; it does not establish exactly-once delivery of external commands.
 
